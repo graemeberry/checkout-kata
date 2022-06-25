@@ -25,7 +25,7 @@ public class StockItem
     {
         decimal price = 0;
 
-        if (this.SpecialPrice == null) { return this.UnitPrice * quantity; }
+        if (this.SpecialPrice == null || this.SpecialPrice.Quantity == 0) { return this.UnitPrice * quantity; }
 
         int quantityRemaining = quantity;
         while (quantityRemaining >= this.SpecialPrice.Quantity)
