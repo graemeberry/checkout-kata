@@ -1,3 +1,4 @@
+using Checkout.Services;
 using NUnit.Framework;
 
 namespace Checkout.Tests;
