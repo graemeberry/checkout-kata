@@ -1,3 +1,4 @@
+using Checkout.Models;
 using Checkout.Services;
 using NUnit.Framework;
 
