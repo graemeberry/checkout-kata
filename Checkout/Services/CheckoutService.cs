@@ -8,7 +8,17 @@ public class CheckoutService
 
     public decimal GetTotalPrice()
     {
-        return (from stockItem in _stockItems.Distinct() let quantity = _stockItems.Count(s => s.Code == stockItem.Code) select stockItem.GetPrice(quantity)).Sum();
+        return GetDistinctStockItems().Sum(stockItem => stockItem.GetPrice(GetTotalQuantityScannedForStockCode(stockItem.Code)));
+    }
+
+    private IEnumerable<StockItem> GetDistinctStockItems()
+    {
+        return _stockItems.Distinct().ToList();
+    }
+
+    private int GetTotalQuantityScannedForStockCode(string code)
+    {
+        return _stockItems.Count(stockItem => stockItem.Code == code);
     }
 
     public void ScanItem(StockItem stockItem)
