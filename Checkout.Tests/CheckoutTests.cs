@@ -5,22 +5,25 @@ using NUnit.Framework;
 namespace Checkout.Tests;
 public class CheckoutTests
 {
+    private CheckoutService _checkoutService = new CheckoutService();
+
     [SetUp]
     public void Setup()
     {
+        _checkoutService = new CheckoutService();
     }
 
     [Test]
     public void Should_Return_Zero_When_No_Items_Scanned()
     {
         // Arrange
-        CheckoutService checkoutService = new CheckoutService();
+        decimal expected = 0;
 
         // Act
-        decimal totalPrice = checkoutService.GetTotalPrice();
+        decimal actual = _checkoutService.GetTotalPrice();
 
         // Assert
-        Assert.AreEqual(0, totalPrice);
+        Assert.AreEqual(expected, actual);
     }
 
     [TestCase("A", 50)]
@@ -30,15 +33,15 @@ public class CheckoutTests
     public void Should_Return_Unit_Price_When_Item_Scanned_Once(string code, decimal unitPrice)
     {
         // Arrange
-        CheckoutService checkoutService = new CheckoutService();
         StockItem stockItem = new StockItem(code, unitPrice);
+        decimal expected = stockItem.UnitPrice;
 
         // Act
-        checkoutService.ScanItem(stockItem);
-        decimal totalPrice = checkoutService.GetTotalPrice();
+        _checkoutService.ScanItem(stockItem);
+        decimal actual = _checkoutService.GetTotalPrice();
 
         // Assert
-        Assert.AreEqual(stockItem.UnitPrice, totalPrice);
+        Assert.AreEqual(expected, actual);
     }
 
     [TestCase("A", 50, 1)]
@@ -48,18 +51,17 @@ public class CheckoutTests
     public void Should_Return_Unit_Price_Multiplied_By_Quantity_When_Scanned_Items_Scanned(string code, decimal unitPrice, int quantity)
     {
         // Arrange
-        CheckoutService checkoutService = new CheckoutService();
         StockItem stockItem = new StockItem(code, unitPrice);
         decimal expected = unitPrice * quantity;
 
         // Act
         for (int i = 0; i < quantity; i++)
         {
-            checkoutService.ScanItem(stockItem);
+            _checkoutService.ScanItem(stockItem);
         }
-        decimal totalPrice = checkoutService.GetTotalPrice();
+        decimal actual = _checkoutService.GetTotalPrice();
 
         // Assert
-        Assert.AreEqual(expected, totalPrice);
+        Assert.AreEqual(expected, actual);
     }
 }
