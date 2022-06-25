@@ -9,8 +9,15 @@ public class CheckoutTests
     }
 
     [Test]
-    public void Test1()
+    public void Should_Return_Zero_When_No_Items_Scanned()
     {
-        Assert.Pass();
+        // Arrange
+        CheckoutService checkoutService = new CheckoutService();
+
+        // Act
+        decimal totalPrice = checkoutService.GetTotalPrice();
+
+        // Assert
+        Assert.AreEqual(0, totalPrice);
     }
 }
