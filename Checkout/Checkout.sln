@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout", "Checkout.csproj", "{3327C26D-2132-4909-BA3F-76EE275F8BEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout", "Checkout.csproj", "{3327C26D-2132-4909-BA3F-76EE275F8BEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.Tests", "..\Checkout.Tests\Checkout.Tests.csproj", "{C949F439-E3FE-49B9-8322-93AB8E5F8266}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout.Tests", "..\Checkout.Tests\Checkout.Tests.csproj", "{C949F439-E3FE-49B9-8322-93AB8E5F8266}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DB114959-BF6E-4CB8-9575-72598AE6D373}"
+	ProjectSection(SolutionItems) = preProject
+		code-cover.cmd = code-cover.cmd
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
