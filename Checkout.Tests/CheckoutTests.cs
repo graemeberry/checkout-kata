@@ -40,4 +40,21 @@ public class CheckoutTests
         // Assert
         Assert.AreEqual(stockItem.UnitPrice, totalPrice);
     }
+
+    [Test]
+    public void Should_Return_Unit_Price_Multiplied_By_Quantity_When_Scanned_Items_Scanned()
+    {
+        // Arrange
+        CheckoutService checkoutService = new CheckoutService();
+        StockItem stockItem = new StockItem("A", 50);
+        decimal expected = 100;
+
+        // Act
+        checkoutService.ScanItem(stockItem);
+        checkoutService.ScanItem(stockItem);
+        decimal totalPrice = checkoutService.GetTotalPrice();
+
+        // Assert
+        Assert.AreEqual(expected, totalPrice);
+    }
 }
