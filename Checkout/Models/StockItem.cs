@@ -20,4 +20,20 @@ public class StockItem
         this.UnitPrice = unitPrice;
         this.SpecialPrice = specialPrice;
     }
+
+    public decimal GetPrice(int quantity)
+    {
+        decimal price = 0;
+
+        if (this.SpecialPrice == null) { return this.UnitPrice * quantity; }
+
+        int quantityRemaining = quantity;
+        while (quantityRemaining >= this.SpecialPrice.Quantity)
+        {
+            price += this.SpecialPrice.Price;
+            quantityRemaining -= this.SpecialPrice.Quantity;
+        }
+
+        return price += quantityRemaining * this.UnitPrice;
+    }
 }
