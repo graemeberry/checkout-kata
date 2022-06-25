@@ -8,15 +8,7 @@ public class CheckoutService
 
     public decimal GetTotalPrice()
     {
-        decimal totalPrice = 0;
-
-        foreach (var stockItem in _stockItems.Distinct())
-        {
-            int quantity = _stockItems.Count(s => s.Code == stockItem.Code);
-            totalPrice += stockItem.GetPrice(quantity);
-        }
-
-        return totalPrice;
+        return (from stockItem in _stockItems.Distinct() let quantity = _stockItems.Count(s => s.Code == stockItem.Code) select stockItem.GetPrice(quantity)).Sum();
     }
 
     public void ScanItem(StockItem stockItem)
