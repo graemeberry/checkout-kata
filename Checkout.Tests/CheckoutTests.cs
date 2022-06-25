@@ -21,4 +21,19 @@ public class CheckoutTests
         // Assert
         Assert.AreEqual(0, totalPrice);
     }
+
+    [Test]
+    public void Should_Return_Unit_Price_When_Item_Scanned_Once()
+    {
+        // Arrange
+        CheckoutService checkoutService = new CheckoutService();
+        StockItem stockItem = new StockItem("A", 50);
+
+        // Act
+        checkoutService.ScanItem(stockItem);
+        decimal totalPrice = checkoutService.GetTotalPrice();
+
+        // Assert
+        Assert.AreEqual(stockItem.UnitPrice, totalPrice);
+    }
 }
