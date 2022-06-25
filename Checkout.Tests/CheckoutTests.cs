@@ -23,12 +23,15 @@ public class CheckoutTests
         Assert.AreEqual(0, totalPrice);
     }
 
-    [Test]
-    public void Should_Return_Unit_Price_When_Item_Scanned_Once()
+    [TestCase("A", 50)]
+    [TestCase("B", 30)]
+    [TestCase("C", 20)]
+    [TestCase("D", 15)]
+    public void Should_Return_Unit_Price_When_Item_Scanned_Once(string code, decimal unitPrice)
     {
         // Arrange
         CheckoutService checkoutService = new CheckoutService();
-        StockItem stockItem = new StockItem("A", 50);
+        StockItem stockItem = new StockItem(code, unitPrice);
 
         // Act
         checkoutService.ScanItem(stockItem);
