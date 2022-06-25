@@ -85,4 +85,25 @@ public class CheckoutTests
         // Assert
         Assert.AreEqual(expected, actual);
     }
+
+    [TestCase("A", 50, 2, 100)]
+    [TestCase("B", 30, 1, 30)]
+    [TestCase("C", 20, 4, 80)]
+    [TestCase("D", 15, 7, 105)]
+    public void Should_Return_Standard_Price_When_Special_Price_Is_Added_With_No_Quantity(string code, decimal unitPrice, int quantity, decimal expected)
+    {
+        // Arrange
+        SpecialPrice specialPrice = new SpecialPrice(0, 0);
+        StockItem stockItem = new StockItem(code, unitPrice, specialPrice);
+
+        // Act
+        for (var i = 0; i < quantity; i++)
+        {
+            _checkoutService.ScanItem(stockItem);
+        }
+        decimal actual = _checkoutService.GetTotalPrice();
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 }
