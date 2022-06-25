@@ -64,4 +64,22 @@ public class CheckoutTests
         // Assert
         Assert.AreEqual(expected, actual);
     }
+
+    [Test]
+    public void Should_Return_Special_Price_When_Special_Price_Is_Applied_To_A_Scanned_Item()
+    {
+        // Arrange
+        SpecialPrice specialPrice = new SpecialPrice(3, 130);
+        StockItem stockItem = new StockItem("A", 50, specialPrice);
+        decimal expected = 130;
+
+        // Act
+        _checkoutService.ScanItem(stockItem);
+        _checkoutService.ScanItem(stockItem);
+        _checkoutService.ScanItem(stockItem);
+        decimal actual = _checkoutService.GetTotalPrice();
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 }
