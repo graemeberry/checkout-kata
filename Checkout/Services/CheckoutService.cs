@@ -4,13 +4,15 @@ namespace Checkout.Services;
 
 public class CheckoutService
 {
+    private readonly List<StockItem> _stockItems = new List<StockItem>();
+
     public decimal GetTotalPrice()
     {
-        return 0;
+        return _stockItems.Sum(stockItem => stockItem.UnitPrice);
     }
 
     public void ScanItem(StockItem stockItem)
     {
-        throw new NotImplementedException();
+        _stockItems.Add(stockItem);
     }
 }
