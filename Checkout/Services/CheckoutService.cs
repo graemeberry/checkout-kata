@@ -1,8 +1,9 @@
 ﻿using Checkout.Models;
+using Checkout.Services.Interfaces;
 
 namespace Checkout.Services;
 
-public class CheckoutService
+public class CheckoutService : ICheckoutService
 {
     private readonly List<StockItem> _stockItems = new List<StockItem>();
 

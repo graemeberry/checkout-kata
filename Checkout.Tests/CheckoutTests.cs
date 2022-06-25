@@ -1,11 +1,12 @@
 using Checkout.Models;
 using Checkout.Services;
+using Checkout.Services.Interfaces;
 using NUnit.Framework;
 
 namespace Checkout.Tests;
 public class CheckoutTests
 {
-    private CheckoutService _checkoutService = new CheckoutService();
+    private ICheckoutService _checkoutService = new CheckoutService();
 
     [SetUp]
     public void Setup()
