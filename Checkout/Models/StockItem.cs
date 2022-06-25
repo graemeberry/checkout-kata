@@ -23,10 +23,19 @@ public class StockItem
 
     public decimal GetPrice(int quantity)
     {
+        return this.SpecialPrice == null ? GetStandardPrice(quantity) : GetSpecialPrice(quantity);
+    }
+
+    private decimal GetStandardPrice(int quantity)
+    {
+        return this.UnitPrice * quantity;
+    }
+
+    private decimal GetSpecialPrice(int quantity)
+    {
+        if (this.SpecialPrice == null || this.SpecialPrice.Quantity == 0) { return GetStandardPrice(quantity); }
+
         decimal price = 0;
-
-        if (this.SpecialPrice == null || this.SpecialPrice.Quantity == 0) { return this.UnitPrice * quantity; }
-
         int quantityRemaining = quantity;
         while (quantityRemaining >= this.SpecialPrice.Quantity)
         {
@@ -34,6 +43,6 @@ public class StockItem
             quantityRemaining -= this.SpecialPrice.Quantity;
         }
 
-        return price += quantityRemaining * this.UnitPrice;
+        return price + GetStandardPrice(quantityRemaining);
     }
 }
