@@ -4,6 +4,6 @@ public class CheckoutService
 {
     public decimal GetTotalPrice()
     {
-        throw new NotImplementedException();
+        return 0;
     }
 }
